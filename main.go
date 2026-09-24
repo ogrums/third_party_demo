@@ -45,45 +45,45 @@ func getSendMsg(code int, msg, content string, isEnd bool) (string, error) {
 
 var answerListAll = [][]string{
 	[]string{
-		"我是",
-		"乐天派公司",
-		"研发的",
-		"私有化",
-		"大模型",
+		"I am",
+		"a private",
+		"large language",
+		"model",
+		"built by Letianpai.",
 	},
 	[]string{
-		"我不知道",
-		"你说的",
-		"是什么，",
-		"我只是一个",
-		"私有化大模型",
+		"I do not know",
+		"what you",
+		"are talking about.",
+		"I am only",
+		"a private model.",
 	},
 	[]string{
-		"沁园春·雪",
-		"【作者】毛泽东 ",
-		"北国风光，千里冰封，万里雪飘。",
-		"望长城内外，惟余莽莽；大河上下，顿失滔滔。",
-		"山舞银蛇，原驰蜡象，欲与天公试比高。",
-		"须晴日，看红装素裹，分外妖娆。",
-		"江山如此多娇，引无数英雄竞折腰。",
-		"惜秦皇汉武，略输文采；唐宗宋祖，稍逊风骚。",
-		"一代天骄，成吉思汗，只识弯弓射大雕。",
-		"俱往矣，数风流人物，还看今朝。",
+		"Qin Yuan Chun · Snow",
+		"Mao Zedong",
+		"North country scene, a thousand miles locked in ice, ten thousand miles of whirling snow.",
+		"On both sides of the Great Wall, only vastness remains; the great river, up and down, has suddenly lost its torrents.",
+		"Mountains dance like silver snakes, the highlands race like wax elephants, wanting to compare height with heaven.",
+		"On a clear day, see the red dress wrapped in white, extraordinarily charming.",
+		"This land is so rich in beauty that it has made countless heroes bow.",
+		"Pity the Qin emperor and Han Wu, a little lacking in literary grace; Tang Zong and Song Zu, somewhat short of romance.",
+		"A generation's proud son, Genghis Khan, knew only to bend the bow and shoot the great eagle.",
+		"All are past. For truly great men, look to this age.",
 	},
 	[]string{
-		"要成为一个优秀的产品经理，必须在心里要有一个“大我”和一个“小我”，可能你要经历这两个过程的磨练，才能找到原因背后的原因。",
-		"什么是“大我”？我的意思是，一个产品经理要把自己当成CEO。在《兄弟连》里面的连长的绰号就是CEO。",
-		"产品经理要对一个产品负责，虽然挂的是经理的头衔，但行驶的是总经理的职责。",
-		"因为要对产品负责，产品经理还要经常去协调很多部门，要去推动很多不归他管的人和事，比如要跟设计打交道，要跟技术打交道，要跟测试打交道，还要去了解用户的想法，还要去跟市场谈支持。",
-		"产品经理要操的心，一点也不比一个总经理少。所以，我说一个优秀的产品经理首先要把自己当成一个CEO，既要负责执行、推动（Executive），也要负责用户体验（Experience）。可能别人不拿",
-		"你当回事，但你自己心里的有一个“大我”。你对一个产品负责，你的title不重要，但是你一定要把这个责任担负起来。",
-		"所以，优秀的产品经理不必在意今天管了多少人，不必在意自己的头衔是高是低，关键最是你能不能利用公司里的资源，不管采用什么手段，最后做出来一个好产品。",
-		"上亿的用户选择使用你做出来的产品，就是对产品经理最大的认可。",
-		"在其他相同的条件下，你做的产品有上亿用户用，他做的产品只有几百万人用，那么你就比他要优秀。",
-		"可能你会说，我是想做一个优秀的产品经理，但我太年轻，没什么资历。我觉得，产品经理要非常自信，你要有这种气势。",
-		"一个优秀的产品经理心中有“大我”，但同时还得不断地“小我”，甚至要“忘我”。这就是说，",
-		"产品经理要忘掉自己。根据我的经验，产品经理最容易犯的几个错误，包括今天我都还在犯，就是产品做着做着，就不是给用户做产品，而是给自己做产品，给同事做产品，给领导做产品了。",
-		"所以，产品经理心中要做到“小我”，甚至“忘我”，就是产品经理必须身临其境，把自己当成一个典型用户，让自己精神分裂，这样才能体会用户心中真正的想法和需求。",
+		"To become a good product manager you need a larger self and a smaller self, and you may have to go through both before you find the reason behind the reason.",
+		"What is the larger self? It means treating yourself as the CEO. In Band of Brothers the company commander's nickname is CEO.",
+		"A product manager is responsible for a product. The title says manager, but the job is a general manager's job.",
+		"Because you own the product, you keep coordinating departments and pushing people you do not manage: design, engineering, test, users, and marketing.",
+		"The worries are no fewer than a general manager's. A good product manager acts as a CEO: responsible for execution and for the experience. Other people may not",
+		"take you seriously, but you keep that larger self. Your title does not matter. You still carry the responsibility.",
+		"So a good product manager does not care how many people they manage today or how high the title is. What matters is whether they can use the company's resources, by whatever means, and ship a good product.",
+		"Hundreds of millions of users choosing the product is the real recognition.",
+		"All else equal, a product used by hundreds of millions is better than a product used by a few million.",
+		"You may say you want to be good at this but you are young and have no seniority. A product manager has to be confident.",
+		"A good product manager keeps a larger self, and also keeps shrinking the self, even forgetting the self. That means",
+		"forgetting yourself. The easiest mistake, one I still make, is to stop building for the user and start building for yourself, for coworkers, or for a boss.",
+		"The smaller self, even the forgotten self, means standing in the user's place and splitting yourself in two, so you can feel what the user actually needs.",
 	},
 }
 
@@ -100,7 +100,7 @@ func handleSSE(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	// to deal body
-	fmt.Printf("收到请求的body数据：%s\n", body)
+	fmt.Printf("request body: %s\n", body)
 	var reqB Req
 	err = json.Unmarshal(body, &reqB)
 	fmt.Println("reqB:", reqB)
@@ -110,11 +110,12 @@ func handleSSE(w http.ResponseWriter, r *http.Request) {
 	fmt.Println("content:", content)
 
 	// Simulate AI model matching answers
-	if strings.Contains(content, "是谁") || strings.Contains(content, "大模型") {
+	if strings.Contains(content, "是谁") || strings.Contains(content, "who") ||
+		strings.Contains(content, "大模型") || strings.Contains(content, "model") {
 		answerList = answerListAll[0]
-	} else if strings.Contains(content, "园春") {
+	} else if strings.Contains(content, "园春") || strings.Contains(content, "snow") {
 		answerList = answerListAll[2]
-	} else if strings.Contains(content, "产品经理") {
+	} else if strings.Contains(content, "产品经理") || strings.Contains(content, "product manager") {
 		answerList = answerListAll[3]
 	} else {
 		answerList = answerListAll[1]
