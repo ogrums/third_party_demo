@@ -21,6 +21,14 @@ func writeJSON(w http.ResponseWriter, status int, body any) {
 	_ = json.NewEncoder(w).Encode(body)
 }
 
+func pending(name string) map[string]any {
+	return map[string]any{
+		"code": 0,
+		"msg":  "mock stub, not implemented: " + name,
+		"data": map[string]any{},
+	}
+}
+
 func main() {
 	now := time.Now().Unix()
 	packageItem := map[string]any{
@@ -125,6 +133,33 @@ func main() {
 			"bind_status": 1, "bind_time": now, "client_id": "mock-client", "user_id": 1,
 		}),
 		"/robot_api/v1/device/serverTime": envelope(map[string]any{"timestamp": now}),
+		"/robot_api/v1/device/allConfig":  pending("LetianpaiOS GET_ALL_CONFIG"),
+		"/robot_api/v1/device/commonConfig": pending("LetianpaiOS GET_COMMON_CONFIG"),
+		"/robot_api/v1/device/uploadStatus": pending("LetianpaiOS UPLOAD_STATUS"),
+		// Paths recovered from source comments or Retrofit annotations.
+		"/robot_api/v1/device/code/getInfo": pending("GeeUIComponents GET_BIND_CODE, GeeUIInstaller"),
+		"/robot_api/v1/device/ip/getRegion": pending("GeeUIComponents GET_REGION_BY_DEVICE_IP"),
+		"/robot_api/v1/common/getConfig":    pending("GeeUIFace AutoService"),
+		"/index/hello":                      pending("LtpNetWork test"),
+		"/index/getorder":                   pending("LtpNetWork test"),
+		"/index/addorder":                   pending("LtpNetWork test"),
+		"/addons/shop/checkout/submit":      pending("LtpNetWork test"),
+	}
+
+	// Constants whose real path was replaced by "your interface url" before open source.
+	// Empty success so a client can be pointed here. Bodies come later.
+	for _, name := range []string{
+		"CALENDAR_LIST", "COUNTDOWN_LIST", "FANS_INFO_LIST", "GENERAL_INFO",
+		"CUSTOM_WATCH_CONFIG", "STOCK_INFO", "IS_DEVICE_BIND", "CUSTOM_LIST",
+		"CUSTOM_PHOTO_LIST", "COMMEMORATION_LIST", "LAMP_CUSTOM_INFO", "NEWS_LIST",
+		"GET_MEDITATION_CONFIG", "GET_USER_APPS_CONFIG", "GET_APPS_SHOW_CONFIG",
+		"UPLOAD_BATTERY_STATUS", "UPLOAD_LEX_LOG", "POST_MODULE_CHANGE",
+		"POST_RESET_STATUS", "GET_ALL_APP_LIST", "GET_APP_LIST", "GET_RECHARGE_CONFIG",
+		"GET_APP_BG_INFO", "POST_UPLOAD_APP_STATUS", "POST_UPLOAD_USER_APP_STATUS",
+		"GET_USER_REMIND_LIST", "GET_TOMATO_LIST", "POST_MANAGE_ADD",
+		"uploadLog", "uploadCall", "getConfigData", "getWakeConfig", "getAiConfig",
+	} {
+		routes["/robot_api/v1/todo/"+name] = pending(name)
 	}
 
 	mux := http.NewServeMux()
