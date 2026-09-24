@@ -28,3 +28,21 @@ Chinese keywords (`是谁`, `大模型`, `园春`, `产品经理`) still match.
 # mac
 ./build.sh
 ```
+
+## Mock robot cloud
+
+`mock/main.go` is a separate process from the language-model demo. It answers the JSON envelope `{code, msg, data}` used by `LtpNetWork` and by the launcher parsers.
+
+```
+go run ./mock
+curl -s http://127.0.0.1:8080/robot_api/v1/bind/getSnByMac
+curl -s http://127.0.0.1:8080/robot_api/v1/device/weather
+```
+
+`getSnByMac` returns:
+
+```json
+{"code":0,"msg":"success","data":{"client_id":"mock-client","hard_code":"mock-hardcode","sn":"EMULATOR00000000"}}
+```
+
+Bind, OTA, upload token, logo, weather, calendar, countdown, fans, clock, bind status, and server time are the same shape. An unknown path returns `code: 404`. The launcher still calls `https://yourservice.com` plus the placeholder path `your interface url`, so point `GeeUINetworkConsts` and `Constants.kt` at `http://127.0.0.1:8080` and the route you want before this mock is used.
