@@ -1,44 +1,37 @@
-# Mock cloud RUX
+# Mock MQTT RUX
 
-Two processes. Not the LLM demo (`POST /sse` :8012).
+Broker officiel vu : `tcp://43.153.69.45:1883`.
+Robot SUB `cmd/L81/<clientId>/+/+` qos1. clientId ≠ SN.
 
-## HTTP — `go run .` in this folder
-
-`http://127.0.0.1:8080` — envelope `{code,msg,data}`.
-`getIotTriplet` already returns `remote_host=127.0.0.1` `remote_port=1883`
-`user_name=mock-device` `password_hash=mock-password` `client_id=mock-client`
-`getSnByMac` returns `sn=EMULATOR00000000`.
-
-Point `LtpNetWork` `Constants.kt` at this host before a robot boot.
-
-## MQTT — Mosquitto
+## 1. Broker local
 
 ```
-docker compose -f mock/docker-compose.yml up
-# from repo root; or from this directory: docker compose up
-```
-
-Anonymous :1883 (and websocket :9001). EmqxService also sends user/password from the triplet; Mosquitto 2 accepts them when `allow_anonymous true`.
-
-Dump everything:
-
-```
+cd third_party_demo/mock
+docker compose up -d
 mosquitto_sub -h 127.0.0.1 -t '#' -v
 ```
 
-After EmqxService connects it SUB `cmd/L81/<sn>/+/+` and PUB ack on `cmd_resp/L81/<sn>/…`.
+Anonyme :1883. Emqx envoie user/pass du triplet ; Mosquitto 2 les ignore si `allow_anonymous true`.
 
-Send a motion command:
+## 2. Pointer le robot (MQTT ignore le DNS)
+
+`su` + DNAT (IP_PC = IPv4 du PC) :
 
 ```
-chmod +x mock/pub.sh
-./mock/pub.sh EMULATOR00000000 controlMotion '{"motion":"forward","number":1}'
+adb shell su -c "iptables -t nat -A OUTPUT -p tcp -d 43.153.69.45 --dport 1883 -j DNAT --to-destination IP_PC:1883"
 ```
 
-Payload shape (from EmqxService.apk):
+Ou firewall routeur : DNAT 43.153.69.45:1883 → PC.
+Log attendu : `Connected to: tcp://IP_PC:1883`.
 
-```json
-{"cmd":"controlMotion","d":{"motion":"forward","number":1},"et":1730000000000}
+HTTP (getIotTriplet) reste optionnel si DNAT MQTT seul : le triplet officiel continue de donner 43.153.69.45, d’où le DNAT.
+
+## 3. Publier une marche
+
+```
+./pub.sh l81_9aa8495f6c9ddf95920428e3c2352d4c
+# équivaut à AT+MOVEW,98,1,2
+./pub.sh l81_9aa8495f6c9ddf95920428e3c2352d4c controlMotion '{"motion":"null","motion_name":"立正","number":0,"step":1,"speed":3}'
 ```
 
-`et` must be in the future (ms). Expired messages are dropped.
+Windows : `pub.ps1` (mêmes args). Topic `cmd/L81/<cid>/controlMotion/<unix>` qos1, `et` dans le futur.
